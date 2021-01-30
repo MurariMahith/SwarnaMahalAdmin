@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerDetailsService } from './../../services/customer-details.service';
 import { CustomerDetails } from 'src/app/models/CustomerDetails';
+import {Inject} from '@angular/core';
+
 
 @Component({
   selector: 'prfx-add-customer',
@@ -10,7 +13,7 @@ export class AddCustomerComponent implements OnInit {
 
   newCustomer : CustomerDetails = new CustomerDetails();
 
-  constructor() {     
+  constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) {     
    }
 
   ngOnInit() {
@@ -18,7 +21,9 @@ export class AddCustomerComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.newCustomer)
+    this.service.createCustomer(this.newCustomer);
+    alert("customer successfully added");
+    window.location.href="/add";
   }
 
 }

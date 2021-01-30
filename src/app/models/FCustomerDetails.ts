@@ -1,4 +1,4 @@
-export class CustomerDetails
+export class FCustomerDetails
 {
     key :string;
     customerId :string;

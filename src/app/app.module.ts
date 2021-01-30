@@ -16,9 +16,9 @@ import { AboutUsComponent } from './component/about-us/about-us.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SendComponent } from './components/send/send.component';
 
-// import { AngularFireModule } from 'angularfire2';
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import { environment } from 'src/environments/environment.prod';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from 'src/environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,9 @@ import { SendComponent } from './components/send/send.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireDatabaseModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
