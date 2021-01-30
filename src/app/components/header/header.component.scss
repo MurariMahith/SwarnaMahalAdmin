@@ -1,0 +1,88 @@
+div
+{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.img-responsive{
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    margin-right: 1%; 
+    border-radius: 15px;  
+    border: none; 
+}
+.img-responsive :hover{
+    cursor: pointer;
+}
+.logo-display
+{
+    //background-color: #0000001a;
+    background-color: rgb(233,236,239);
+    padding-left: 10%;
+    padding-right: 10%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+#menu-tool-btn{
+    color: #CCCCCC;
+}
+#menu-tool-btn.dx-state-hover {
+    color: #ebebeb;
+}
+#menu-tool-btn.dx-state-selected{
+    color: #ebebeb;
+}
+#menu-tool-btn.dx-state-active{
+    color: #ebebeb;
+}
+
+
+
+/* ::ng-deep .dx-button{
+  background-color: red;
+} */
+
+
+.toolbar
+{
+  background-color:rgb(51,53,69);
+  padding: 10px 10px 10px 10px;
+  padding-left: 10%;
+  margin: 0;
+}
+.btnm
+{
+  border: none;
+  width: max-content;
+  border-bottom: 3px solid white;
+}
+.btnm:hover
+{
+  // border: 2px solid black;
+  // font-weight: bolder;
+  border-bottom: 3px solid black;
+}
+.active-link
+{
+  border-bottom: 3px solid rgb(51,53,69);
+}
+.left-div
+{
+  //width: 40%;
+  float: left;
+  display: flex;
+}
+.right-div
+{
+  margin-left: 40%;
+  display: flex;
+  justify-content:flex-end;
+  width: 50%;
+}
