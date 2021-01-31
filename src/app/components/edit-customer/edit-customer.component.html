@@ -25,3 +25,72 @@
     </table>
   </div>
 </div>
+
+<div class="jumbotron jumbotron-fluid" *ngIf="editClicked">
+  <div class="container">
+    <h1 class="display-6">Editing Customer {{ customerToBeEdited.customerName }}</h1>
+    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+    <!-- <p>below is form</p> -->
+    <div>
+      <form novalidate #addForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="customerName">Customer Name</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="text" class="form-control" id="customerName" placeholder="Enter Customer Name" required [(ngModel)]="customerToBeEdited.customerName" name="customername" #customername="ngModel">
+          <div *ngIf="customername.invalid && (customername.dirty || customername.touched)">
+            <p *ngIf="customername.errors?.required" class="error">Customer Name is required</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="tel" class="form-control" id="mobile" aria-describedby="emailHelp" placeholder="Enter Customer Mobile Number" required [(ngModel)]="customerToBeEdited.mobile" name="mobilenum" #mobilenum="ngModel" minlength="10" maxlength="10">
+          <div *ngIf="mobilenum.invalid && (mobilenum.dirty || mobilenum.touched)">
+            <p *ngIf="mobilenum.errors?.required" class="error">Mobile Number is Required</p>
+            <p *ngIf="mobilenum.errors?.minlength" class="error">Mobile Number Should be of 10 Numeric digits</p>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="usingWhatsapp" [(ngModel)]="customerToBeEdited.usingWhatsapp" name="usewhatsapp">
+          <label class="form-check-label" for="usingWhatsapp">Has WhatsApp for given number?</label>
+        </div>
+        <div class="form-group">
+          <label for="dateofbirth">Date Of Birth</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="text" class="form-control" id="dateofbirth" aria-describedby="emailHelp" placeholder="Enter Customer Date of Birth" required [(ngModel)]="customerToBeEdited.dob" name="dob" #dob="ngModel" minlength="10" maxlength="10">
+          <div *ngIf="dob.invalid && (dob.dirty || dob.touched)">
+            <p *ngIf="dob.errors?.required" class="error">Date Of Birth is Required</p>
+            <p *ngIf="dob.errors?.minlength" class="error">Date Of Birth should be in DD/MM/YYYY format only</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateofmarriage">Anniversary Date</label>
+          <input type="text" class="form-control" id="dateofmarriage" placeholder="Enter Customer Anniversary date" [(ngModel)]="customerToBeEdited.marriageDate" name="md" #md="ngModel" minlength="10" maxlength="10">
+          <div *ngIf="md.invalid && (md.dirty || md.touched)">
+            <p *ngIf="md.errors?.maxlength" class="error">Anniversary Date should be in DD/MM/YYYY format only</p>
+            <p *ngIf="md.errors?.minlength" class="error">Anniversary Date should be in DD/MM/YYYY format only</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="emailId">Email address</label>
+          <input type="email" class="form-control" id="emailId" aria-describedby="emailHelp" placeholder="Enter Customer Email-Id" [(ngModel)]="customerToBeEdited.emailId" name="emailid2" #emailid2="ngModel">
+          <div *ngIf="emailid2.invalid && (emailid2.dirty || emailid2.touched)">
+            <p *ngIf="emailid2.errors?.maxlength" class="error">Anniversary Date should be in DD/MM/YYYY format only</p>
+            <p *ngIf="emailid2.errors?.minlength" class="error">Anniversary Date should be in DD/MM/YYYY format only</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="email" class="form-control" id="address" aria-describedby="emailHelp" placeholder="Enter Customer Address" [(ngModel)]="customerToBeEdited.address" name="address">
+        </div>        
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="isLocalCustomer" [(ngModel)]="customerToBeEdited.isLocalCustomer" name="localcust">
+          <label class="form-check-label" for="isLocalCustomer">Is Local Customer?</label>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="isOldCustomer" [(ngModel)]="customerToBeEdited.isOldCustomer" name="oldcust">
+          <label class="form-check-label" for="isOldCustomer">Customer already bought something?</label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]='!addForm.valid' >Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

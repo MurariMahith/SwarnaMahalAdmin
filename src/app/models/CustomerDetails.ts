@@ -7,7 +7,8 @@ export class CustomerDetails
     emailId :string;
     mobile :string;
     address :string;
-    usingWhatsapp :boolean;
-    isLocalCustomer :boolean;
-    isOldCustomer :boolean;
+    usingWhatsapp :boolean = false;
+    isLocalCustomer :boolean = false;
+    isOldCustomer :boolean = false;
+    uniqueCode :string = "";
 }

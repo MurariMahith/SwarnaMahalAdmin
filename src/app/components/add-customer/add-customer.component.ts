@@ -22,8 +22,11 @@ export class AddCustomerComponent implements OnInit {
   onSubmit()
   {
     this.service.createCustomer(this.newCustomer);
+    console.log(this.newCustomer.isLocalCustomer)
+    this.newCustomer.uniqueCode = " ";
     alert("customer successfully added");
-    window.location.href="/add";
+    console.log(this.newCustomer)
+    //window.location.href="/add";
   }
 
 }

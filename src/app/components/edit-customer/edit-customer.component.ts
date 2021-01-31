@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerDetailsService } from 'src/app/services/customer-details.service';
 import { map } from 'rxjs/operators';
 import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
+import { CustomerDetails } from 'src/app/models/CustomerDetails';
 
 @Component({
   selector: 'prfx-edit-customer',
@@ -12,6 +13,8 @@ import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
 export class EditCustomerComponent implements OnInit {
 
   AllCustomers : Array<FCustomerDetails> = [];
+  customerToBeEdited : FCustomerDetails = new FCustomerDetails();
+  editClicked : boolean = false;
 
   constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) { }
 
@@ -34,6 +37,21 @@ export class EditCustomerComponent implements OnInit {
     this.service.deleteCustomer(key)
       .then(() => console.log("deleted successfully"))
       .catch(() => console.log("something went wrong"))
+  }
+
+  editCustomer(key :string)
+  {
+    this.customerToBeEdited = this.AllCustomers.find(o => o.key === key);
+    this.editClicked = true;
+    console.log(this.customerToBeEdited);
+    console.log(this.editClicked);
+  }
+
+  onSubmit()
+  {
+    var key2 = this.customerToBeEdited.key;
+    delete this.customerToBeEdited.key;
+    this.service.updateCustomer(key2,this.customerToBeEdited);
   }
 
 }
