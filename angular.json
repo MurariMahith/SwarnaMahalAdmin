@@ -24,7 +24,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -47,7 +48,9 @@
               "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -81,7 +84,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ]
           }
         },
@@ -127,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "SwarnaMahalAdmin"
+  "defaultProject": "SwarnaMahalAdmin",
+  "cli": {
+    "analytics": "445cfe7e-ecc4-4c5b-8dd5-57acc849d2bb"
+  }
 }

@@ -1,0 +1,126 @@
+{
+  "name": "Swarna Mahal",
+  "short_name": "Swarna Mahal",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icons/sm1-small_72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_1_96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_2_128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_3_144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_4_152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_5_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_6_384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/sm1-small_7_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+       "name": "Home",
+       "description": "Home page of Swarna Mahal Admin",
+       "url": "/home",
+       "icons": [
+          {
+             "src": "assets/icons/sm1-small_1_96x96.png",
+             "sizes": "96x96",
+             "type": "image/png",
+             "purpose": "any"
+          }
+       ]
+    },
+    {
+      "name": "Add New Customer",
+      "description": "Add New Customer",
+      "url": "/add",
+      "icons": [
+         {
+            "src": "assets/icons/sm1-small_1_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+         }
+      ]
+   },
+   {
+       "name": "Edit Customers",
+       "description": "Edit Customer",
+       "url": "/edit",
+       "icons": [
+          {
+             "src": "assets/icons/sm1-small_1_96x96.png",
+             "sizes": "96x96",
+             "type": "image/png",
+             "purpose": "any"
+          }
+       ]
+    },
+    {
+      "name": "View All Customers",
+      "description": "View All Customers",
+      "url": "/all",
+      "icons": [
+         {
+            "src": "assets/icons/sm1-small_1_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+         }
+      ]
+   },
+   {
+    "name": "Today's DashBoard",
+    "description": "Today's DashBoard",
+    "url": "/today",
+    "icons": [
+       {
+          "src": "assets/icons/sm1-small_1_96x96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+       }
+    ]
+  }
+ ]
+}
