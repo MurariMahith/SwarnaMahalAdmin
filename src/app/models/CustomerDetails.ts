@@ -11,4 +11,6 @@ export class CustomerDetails
     isLocalCustomer :boolean = false;
     isOldCustomer :boolean = false;
     uniqueCode :string = "";
+    offerStartDate :string;
+    offerEndDate :string;
 }

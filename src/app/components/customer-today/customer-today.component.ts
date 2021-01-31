@@ -4,6 +4,7 @@ import { CustomerDetailsService } from 'src/app/services/customer-details.servic
 import { map } from 'rxjs/operators';
 import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
 import { CustomerDetails } from 'src/app/models/CustomerDetails';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'prfx-customer-today',
@@ -13,11 +14,16 @@ import { CustomerDetails } from 'src/app/models/CustomerDetails';
 export class CustomerTodayComponent implements OnInit {
 
   AllCustomers : Array<FCustomerDetails> = [];
-  AllCustomersOriginal : Array<FCustomerDetails> = [];
+  AllCustomersToday : Array<FCustomerDetails> = [];
   updateCustomer : CustomerDetails = new CustomerDetails();
   count : number = 0;
+  dateToday : string;
+  todayCustomersCount : number = 0;
 
-  constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) { }
+  constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService,@Inject(Router) private router :Router) { 
+    var date = new Date();    
+    this.dateToday = date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear();
+   }
 
   ngOnInit() {
     this.service.getCustomersList().snapshotChanges().pipe(
@@ -27,15 +33,47 @@ export class CustomerTodayComponent implements OnInit {
         )
       )
     ).subscribe(o => {
-      this.AllCustomers = o;
-      this.AllCustomersOriginal = o;
-      console.log(this.AllCustomers)
+      this.AllCustomers = o;     
+      // console.log(this.AllCustomers)
+      this.getCustomersWithDobThreeDaysAfter(this.AllCustomers)
     })
+  }
+
+  getCustomersWithDobThreeDaysAfter(customerList :Array<FCustomerDetails>)
+  {
+    var date = new Date();
+    var dd = date.getDate();
+    var mm = date.getMonth()+1
+    var dayString;
+    var monthString;
+    if (dd < 10) { 
+      dayString = '0' + dd; 
+    } 
+    else
+      dayString = ""+dd;
+    if (mm < 10) { 
+      monthString = '0' + mm; 
+    } 
+    else
+      monthString = ""+mm;
+    var todayDate = dayString+"/"+monthString+"/"+date.getFullYear();  
+    console.log(todayDate)
+    //we need below line not to duplicate records if not understood contact murari
+    this.AllCustomersToday.length = 0;
+    customerList.forEach(o => {
+      if(o.offerStartDate === todayDate)
+      {
+        this.AllCustomersToday.push(o);
+      }
+    });
+    this.todayCustomersCount = this.AllCustomersToday.length
+    console.log(this.todayCustomersCount)
+    console.log(this.AllCustomersToday)
   }
 
   generateUniqueCodes()
   {
-    this.AllCustomers.forEach(o => {
+    this.AllCustomersToday.forEach(o => {
       console.log(o)
       console.log(o.uniqueCode == "")
       if(o.uniqueCode == "")
@@ -61,6 +99,13 @@ export class CustomerTodayComponent implements OnInit {
       alert("unique codes generated for "+this.count+" customers.");
     else
       alert("For all the customers unique codes has already generated");
+
+    this.router.navigateByUrl('/today')
+  }
+
+  sendMessages()
+  {
+    alert("orey mukesh ga, idi malli alochinchi raddam intha varaku ok ga?")
   }
 
 }

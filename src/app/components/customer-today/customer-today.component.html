@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Edit Customers</h1>
-    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+    <h1 class="display-4">Customers</h1>
+    <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on next 3 Days</p>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let customer of AllCustomers'>
+        <tr *ngFor='let customer of AllCustomersToday'>
           <td>{{customer.customerName}}</td>
           <td>{{customer.mobile}}</td>
           <td>{{customer.dob}}</td>
@@ -24,7 +24,7 @@
     </table>
     <!-- <div style="display: flex;justify-content: center;"> --><div>
       <button type="button" class="btn btn-success btn-lg btn-block" (click)="generateUniqueCodes()">Generate UniqueCodes</button>
-      <button type="button" class="btn btn-primary btn-lg btn-block">Send Messages</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block" (click)="sendMessages()">Send Messages</button>
     </div>
   </div>
 </div>

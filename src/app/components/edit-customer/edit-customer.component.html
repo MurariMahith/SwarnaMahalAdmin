@@ -89,6 +89,14 @@
           <input type="checkbox" class="form-check-input" id="isOldCustomer" [(ngModel)]="customerToBeEdited.isOldCustomer" name="oldcust">
           <label class="form-check-label" for="isOldCustomer">Customer already bought something?</label>
         </div>
+        <div class="form-group">
+          <label for="offerStartDate">Offer Start Date</label> <span class="badge badge-light" style="margin-left: 1%;">readonly</span>
+          <input type="text" class="form-control" id="offerStartDate" readonly [(ngModel)]="customerToBeEdited.offerStartDate" name="ofstartDatr" #ofstartDatr="ngModel" minlength="10" maxlength="10">
+        </div>
+        <div class="form-group">
+          <label for="offerEndDate">Offer End Date</label> <span class="badge badge-light" style="margin-left: 1%;">readonly</span>
+          <input type="text" class="form-control" id="offerEndDate" readonly [(ngModel)]="customerToBeEdited.offerEndDate" name="ofendDatr" #ofendDatr="ngModel" minlength="10" maxlength="10">
+        </div>
         <button class="btn btn-primary" type="submit" [disabled]='!addForm.valid' >Submit</button>
       </form>
     </div>
