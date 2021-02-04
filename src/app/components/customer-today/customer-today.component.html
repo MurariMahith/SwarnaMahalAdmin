@@ -1,7 +1,14 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Customers</h1>
-    <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on next 3 Days</p>
+    <h1 class="display-4">Customers</h1>   
+    <div *ngIf="todayCustomersCount == 0">
+      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you don't have customer/s having birthdays on next 3rd Day</p>
+      <a type="button" class="btn btn-success btn-lg btn-block" routerLink="/all">View All Customers</a>
+      <a type="button" class="btn btn-primary btn-lg btn-block" routerLink="/edit">Edit Customers</a>
+    </div>
+    
+    <div *ngIf="todayCustomersCount != 0">
+      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on next 3rd Day</p>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -22,9 +29,10 @@
         </tr>
       </tbody>
     </table>
-    <!-- <div style="display: flex;justify-content: center;"> --><div>
+    <div>
       <button type="button" class="btn btn-success btn-lg btn-block" (click)="generateUniqueCodes()">Generate UniqueCodes</button>
       <button type="button" class="btn btn-primary btn-lg btn-block" (click)="sendMessages()">Send Messages</button>
+    </div>
     </div>
   </div>
 </div>

@@ -70,7 +70,7 @@ export class EditCustomerComponent implements OnInit {
     // this.customerToBeEdited.offerEndDate = this.offerEndDate;
     delete this.customerToBeEdited.key;
     this.service.updateCustomer(key2,this.customerToBeEdited);
-    this.router.navigateByUrl('/edit')
+    this.router.navigateByUrl('/all')
 
   }
 

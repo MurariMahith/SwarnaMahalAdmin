@@ -51,6 +51,15 @@ export class AllCustomerComponent implements OnInit {
     document.getElementById("local").classList.remove("disabled");
     document.getElementById("whatsapp").classList.remove("disabled");
     document.getElementById("old").classList.remove("disabled");
+  }
+  offerUsed(key :string)
+  {
+    //here we update user as he used his offer and he is not eligible for this offer again in this year
+    var customerToAvailedOffer = new FCustomerDetails();
+    customerToAvailedOffer = this.AllCustomersOriginal.find(o => o.key === key);
+    customerToAvailedOffer.offerUsed = true;
+    console.log(customerToAvailedOffer)
+    alert("You are availing offer for "+customerToAvailedOffer.customerName)
 
   }
 

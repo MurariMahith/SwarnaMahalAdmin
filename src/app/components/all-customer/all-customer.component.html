@@ -13,6 +13,8 @@
           <th scope="col">Mobile Number</th>
           <th scope="col">DoB</th>
           <th scope="col">Address</th>
+          <th scope="col">Offer Availed</th>
+          <th scope="col">Avail Now</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +22,11 @@
           <td>{{customer.customerName}}</td>
           <td>{{customer.mobile}}</td>
           <td>{{customer.dob}}</td>
-          <td>{{customer.address}}</td>
+          <td>{{customer.address}}</td>       
+          <td style="color:green" *ngIf="customer.offerUsed">Availed</td>         
+          <td style="color:green" *ngIf="!customer.offerUsed">--</td>
+          <td *ngIf="customer.offerUsed">--</td>         
+          <td *ngIf="!customer.offerUsed"><button type="button" class="btn btn-success" (click)="offerUsed(customer.key)">Avail Now</button></td>
         </tr>
       </tbody>
     </table>

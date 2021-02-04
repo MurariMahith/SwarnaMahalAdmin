@@ -14,4 +14,5 @@ export class FCustomerDetails
     uniqueCode : string = "";
     offerStartDate :string;
     offerEndDate :string;
+    offerUsed :boolean = false;
 }
