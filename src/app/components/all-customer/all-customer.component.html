@@ -1,9 +1,15 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">View All Customers</h1>
-    <button type="button" class="btn btn-outline-dark" id="local" style="margin: 1%;" (click)="sortLocalCustomers()">See only Local Customers</button> 
+    <!-- <button type="button" class="btn btn-outline-dark" id="local" style="margin: 1%;" (click)="sortLocalCustomers()">See only Local Customers</button> 
     <button type="button" class="btn btn-outline-dark" id="whatsapp" style="margin: 1%;" (click)="sortWhatsappCustomers()">See only users that have whatsapp</button>
     <button type="button" class="btn btn-outline-dark" id="old" style="margin: 1%;" (click)="sortOldCustomers()">See only old customers</button>
+    <button type="button" class="btn btn-outline-dark" id="availed" style="margin: 1%;" (click)="sortAvailedCustomers()">See only Offer Availed Customers</button>
+    <button type="button" class="btn btn-outline-dark" id="reset" style="margin: 1%;" (click)="reset()">Reset</button> -->
+    <button type="button" class="btn btn-outline-dark" id="local" style="margin: 1%;" (click)="sortLocalCustomers()">Local Customers</button> 
+    <button type="button" class="btn btn-outline-dark" id="whatsapp" style="margin: 1%;" (click)="sortWhatsappCustomers()">Customers with WhatsApp</button>
+    <button type="button" class="btn btn-outline-dark" id="old" style="margin: 1%;" (click)="sortOldCustomers()">Old Customers</button>
+    <button type="button" class="btn btn-outline-dark" id="availed" style="margin: 1%;" (click)="sortAvailedCustomers()">Customers who Availed Offer</button>
     <button type="button" class="btn btn-outline-dark" id="reset" style="margin: 1%;" (click)="reset()">Reset</button>
 
     <table class="table table-striped">
@@ -13,8 +19,8 @@
           <th scope="col">Mobile Number</th>
           <th scope="col">DoB</th>
           <th scope="col">Address</th>
-          <th scope="col">Offer Availed</th>
-          <th scope="col">Avail Now</th>
+          <th scope="col">Offer Status</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -24,9 +30,7 @@
           <td>{{customer.dob}}</td>
           <td>{{customer.address}}</td>       
           <td style="color:green" *ngIf="customer.offerUsed">Availed</td>         
-          <td style="color:green" *ngIf="!customer.offerUsed">--</td>
-          <td *ngIf="customer.offerUsed">--</td>         
-          <td *ngIf="!customer.offerUsed"><button type="button" class="btn btn-success" (click)="offerUsed(customer.key)">Avail Now</button></td>
+          <td style="color:red" *ngIf="!customer.offerUsed">Not Availed</td>
         </tr>
       </tbody>
     </table>

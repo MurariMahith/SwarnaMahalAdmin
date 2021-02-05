@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.prod';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AvailOfferComponent } from './components/avail-offer/avail-offer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     PersonalComponent,
     AboutUsComponent,
     ErrorComponent,
-    SendComponent
+    SendComponent,
+    AvailOfferComponent
   ],
   imports: [
     BrowserModule,

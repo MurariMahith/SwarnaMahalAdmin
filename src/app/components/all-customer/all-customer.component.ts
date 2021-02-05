@@ -45,41 +45,18 @@ export class AllCustomerComponent implements OnInit {
     this.AllCustomers = this.AllCustomers.filter(o => o.isOldCustomer === true);
     document.getElementById("old").classList.add("disabled");
   }
+  sortAvailedCustomers()
+  {
+    this.AllCustomers = this.AllCustomers.filter(o => o.offerUsed === true);
+    document.getElementById("availed").classList.add("disabled");
+  }
   reset()
   {
     this.AllCustomers = this.AllCustomersOriginal;
     document.getElementById("local").classList.remove("disabled");
     document.getElementById("whatsapp").classList.remove("disabled");
     document.getElementById("old").classList.remove("disabled");
-  }
-  offerUsed(key :string)
-  {
-    //here we update user as he used his offer and he is not eligible for this offer again in this year
-    var customerToAvailedOffer = new FCustomerDetails();
-    customerToAvailedOffer = this.AllCustomersOriginal.find(o => o.key === key);
-
-    var confirmAvailOffer = confirm("Do you want to avail offer for "+customerToAvailedOffer.customerName);
-    if(confirmAvailOffer)
-    {
-      var uniqueCodeGivenByAdmin = prompt("Please enter unique code given to customer");
-      if (uniqueCodeGivenByAdmin == null || uniqueCodeGivenByAdmin == "") 
-      {
-        alert("unique code empty or not given")
-      } 
-      else if(uniqueCodeGivenByAdmin == customerToAvailedOffer.uniqueCode)
-      {
-        alert("You are availing offer for "+customerToAvailedOffer.customerName)
-        customerToAvailedOffer.offerUsed = true;
-        console.log(customerToAvailedOffer)
-      }
-      else 
-      {
-        alert("unique code not matched with "+customerToAvailedOffer.customerName+" please try again")
-      }
-      //alert("You are availing offer for "+customerToAvailedOffer.customerName)
-      // customerToAvailedOffer.offerUsed = true;
-      // console.log(customerToAvailedOffer)
-    }
+    document.getElementById("availed").classList.remove("disabled");
   }
 
 }
