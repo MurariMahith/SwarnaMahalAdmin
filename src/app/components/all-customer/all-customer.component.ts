@@ -57,10 +57,29 @@ export class AllCustomerComponent implements OnInit {
     //here we update user as he used his offer and he is not eligible for this offer again in this year
     var customerToAvailedOffer = new FCustomerDetails();
     customerToAvailedOffer = this.AllCustomersOriginal.find(o => o.key === key);
-    customerToAvailedOffer.offerUsed = true;
-    console.log(customerToAvailedOffer)
-    alert("You are availing offer for "+customerToAvailedOffer.customerName)
 
+    var xyz = confirm("Do you want to avail offer for "+customerToAvailedOffer.customerName);
+    if(xyz)
+    {
+      var person = prompt("Please enter unique code given to customer");
+      if (person == null || person == "") 
+      {
+        alert("unique code empty or not given")
+      } 
+      else if(person == customerToAvailedOffer.uniqueCode)
+      {
+        alert("You are availing offer for "+customerToAvailedOffer.customerName)
+        customerToAvailedOffer.offerUsed = true;
+        console.log(customerToAvailedOffer)
+      }
+      else 
+      {
+        alert("unique code not matched with "+customerToAvailedOffer.customerName+" please try again")
+      }
+      //alert("You are availing offer for "+customerToAvailedOffer.customerName)
+      // customerToAvailedOffer.offerUsed = true;
+      // console.log(customerToAvailedOffer)
+    }
   }
 
 }
