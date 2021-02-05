@@ -13,6 +13,7 @@ export class AvailOfferComponent implements OnInit {
 
   AllCustomers : Array<FCustomerDetails> = [];
   AllCustomersOriginal : Array<FCustomerDetails> = [];
+  yetToAvailOffer : boolean = false;
 
   constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) { }
 
@@ -28,6 +29,19 @@ export class AvailOfferComponent implements OnInit {
       this.AllCustomersOriginal = o;
       console.log(this.AllCustomers)
     })
+  }
+
+  sortCustomersYetToAvailOffer()
+  {
+    this.AllCustomers = this.AllCustomers.filter(o => o.offerUsed === false);
+    this.yetToAvailOffer = true;
+    document.getElementById("availed").classList.add("disabled");
+  }
+  reset()
+  {
+    this.AllCustomers = this.AllCustomersOriginal;
+    this.yetToAvailOffer = false;
+    document.getElementById("availed").classList.remove("disabled");
   }
 
   offerUsed(key :string)

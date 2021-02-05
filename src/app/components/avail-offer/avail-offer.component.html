@@ -1,7 +1,8 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4">Customers</h1>
-  
+      <button type="button" class="btn btn-outline-dark" id="availed" style="margin: 1%;" (click)="sortCustomersYetToAvailOffer()">Customers yet to Avail Offers</button>
+      <button type="button" class="btn btn-outline-dark" id="reset" style="margin: 1%;" (click)="reset()">Reset</button>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -10,9 +11,9 @@
             <th scope="col">DoB</th>
             <th scope="col">Address</th>
             <th scope="col">Unique Code</th>
-            <th scope="col">Offer Availed</th>
+            <th scope="col" *ngIf="!yetToAvailOffer">Offer Availed</th>
             <th scope="col">Avail Now</th>
-            <th scope="col">Cancel Availed Offer</th>
+            <th scope="col" *ngIf="!yetToAvailOffer">Cancel Availed Offer</th>
           </tr>
         </thead>
         <tbody>
@@ -22,12 +23,12 @@
             <td>{{customer.dob}}</td>
             <td>{{customer.address}}</td>
             <td>{{customer.uniqueCode}}</td>       
-            <td style="color:green" *ngIf="customer.offerUsed">Availed</td>         
-            <td *ngIf="!customer.offerUsed">--</td>
+            <td style="color:green" *ngIf="customer.offerUsed && !yetToAvailOffer">Availed</td>         
+            <td *ngIf="!customer.offerUsed && !yetToAvailOffer">--</td>
             <td *ngIf="customer.offerUsed">--</td>         
             <td *ngIf="!customer.offerUsed"><button type="button" class="btn btn-success" (click)="offerUsed(customer.key)">Avail</button></td>
-            <td *ngIf="customer.offerUsed"><button type="button" class="btn btn-danger" (click)="offerCancel(customer.key)">Cancel</button></td>
-            <td *ngIf="!customer.offerUsed">--</td>
+            <td *ngIf="customer.offerUsed && !yetToAvailOffer"><button type="button" class="btn btn-danger" (click)="offerCancel(customer.key)">Cancel</button></td>
+            <td *ngIf="!customer.offerUsed && !yetToAvailOffer">--</td>
           </tr>
         </tbody>
       </table>
