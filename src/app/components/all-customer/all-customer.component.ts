@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerDetailsService } from 'src/app/services/customer-details.service';
 import { map } from 'rxjs/operators';
 import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
+import * as moment from 'moment';
 
 @Component({
   selector: 'prfx-all-customer',
@@ -28,6 +29,8 @@ export class AllCustomerComponent implements OnInit {
       this.AllCustomersOriginal = o;
       console.log(this.AllCustomers)
     })
+    console.log("hai")
+    console.log("hai"+moment().subtract(1, 'days').toString())
   }
 
   sortLocalCustomers()

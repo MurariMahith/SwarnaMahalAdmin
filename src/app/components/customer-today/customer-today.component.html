@@ -2,13 +2,13 @@
   <div class="container">
     <h1 class="display-4">Customers</h1>   
     <div *ngIf="todayCustomersCount == 0">
-      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you don't have customer/s having birthdays on next 3rd Day</p>
+      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you don't have customer/s having birthdays on {{NextThreeDay}}</p>
       <a type="button" class="btn btn-success btn-lg btn-block" routerLink="/all">View All Customers</a>
       <a type="button" class="btn btn-primary btn-lg btn-block" routerLink="/edit">Edit Customers</a>
     </div>
     
     <div *ngIf="todayCustomersCount != 0">
-      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on next 3rd Day</p>
+      <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on {{NextThreeDay}}</p>
     <table class="table table-striped">
       <thead>
         <tr>

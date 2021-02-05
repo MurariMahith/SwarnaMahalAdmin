@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerDetailsService } from 'src/app/services/customer-details.service';
 import { map } from 'rxjs/operators';
 import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
+import * as moment from 'moment';
 
 @Component({
   selector: 'prfx-avail-offer',
@@ -18,6 +19,13 @@ export class AvailOfferComponent implements OnInit {
   constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) { }
 
   ngOnInit() {
+    let xyz = moment('1999/05/21').subtract(1, 'days').startOf('day').toString()
+    console.log(moment('1999/02/28').subtract(3, 'days').startOf('day').toString())
+    console.log(moment('1999/02/28').add(3, 'days').startOf('day').toString())
+    console.log("hello")
+    console.log(new Date(xyz))
+    var d = new Date(xyz)
+    console.log(d.getDate())
     this.service.getCustomersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
