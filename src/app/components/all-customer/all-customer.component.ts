@@ -58,15 +58,15 @@ export class AllCustomerComponent implements OnInit {
     var customerToAvailedOffer = new FCustomerDetails();
     customerToAvailedOffer = this.AllCustomersOriginal.find(o => o.key === key);
 
-    var xyz = confirm("Do you want to avail offer for "+customerToAvailedOffer.customerName);
-    if(xyz)
+    var confirmAvailOffer = confirm("Do you want to avail offer for "+customerToAvailedOffer.customerName);
+    if(confirmAvailOffer)
     {
-      var person = prompt("Please enter unique code given to customer");
-      if (person == null || person == "") 
+      var uniqueCodeGivenByAdmin = prompt("Please enter unique code given to customer");
+      if (uniqueCodeGivenByAdmin == null || uniqueCodeGivenByAdmin == "") 
       {
         alert("unique code empty or not given")
       } 
-      else if(person == customerToAvailedOffer.uniqueCode)
+      else if(uniqueCodeGivenByAdmin == customerToAvailedOffer.uniqueCode)
       {
         alert("You are availing offer for "+customerToAvailedOffer.customerName)
         customerToAvailedOffer.offerUsed = true;
