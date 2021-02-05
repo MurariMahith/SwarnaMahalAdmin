@@ -19,13 +19,13 @@ export class AvailOfferComponent implements OnInit {
   constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService) { }
 
   ngOnInit() {
-    let xyz = moment('1999/05/21').subtract(1, 'days').startOf('day').toString()
-    console.log(moment('1999/02/28').subtract(3, 'days').startOf('day').toString())
-    console.log(moment('1999/02/28').add(3, 'days').startOf('day').toString())
-    console.log("hello")
-    console.log(new Date(xyz))
-    var d = new Date(xyz)
-    console.log(d.getDate())
+    // let xyz = moment('1999/05/21').subtract(1, 'days').startOf('day').toString()
+    // console.log(moment('1999/02/28').subtract(3, 'days').startOf('day').toString())
+    // console.log(moment('1999/02/28').add(3, 'days').startOf('day').toString())
+    // console.log("hello")
+    // console.log(new Date(xyz))
+    // var d = new Date(xyz)
+    // console.log(d.getDate())
     this.service.getCustomersList().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -70,6 +70,9 @@ export class AvailOfferComponent implements OnInit {
       {
         alert("You are availing offer for "+customerToAvailedOffer.customerName)
         customerToAvailedOffer.offerUsed = true;
+        var key2 = customerToAvailedOffer.key;
+        delete customerToAvailedOffer.key;
+        this.service.updateCustomer(key2,customerToAvailedOffer);
         console.log(customerToAvailedOffer)
       }
       else 
@@ -88,9 +91,14 @@ export class AvailOfferComponent implements OnInit {
     var customerToCancelOffer = new FCustomerDetails();
     customerToCancelOffer = this.AllCustomersOriginal.find(o => o.key === key);
 
-    var confirmCancelOffer = confirm("Do you want to cancel availed offer for "+customerToCancelOffer.customerName+", Now the cistomer can avail offer again.");
+    var confirmCancelOffer = confirm("Do you want to cancel availed offer for "+customerToCancelOffer.customerName+", Now the customer can avail offer again.");
     if(confirmCancelOffer)
     {
+      customerToCancelOffer.offerUsed = false;
+      var key2 = customerToCancelOffer.key;
+      delete customerToCancelOffer.key;
+      this.service.updateCustomer(key2,customerToCancelOffer);
+      console.log(customerToCancelOffer)
       alert("Offer rolled back for "+customerToCancelOffer.customerName+".");
     }
   }
