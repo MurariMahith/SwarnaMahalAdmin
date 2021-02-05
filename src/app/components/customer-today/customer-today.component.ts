@@ -6,6 +6,7 @@ import { FCustomerDetails } from 'src/app/models/FCustomerDetails';
 import { CustomerDetails } from 'src/app/models/CustomerDetails';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'prfx-customer-today',
@@ -22,7 +23,21 @@ export class CustomerTodayComponent implements OnInit {
   NextThreeDay : string;
   todayCustomersCount : number = 0;
 
-  constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService,@Inject(Router) private router :Router) { 
+  urlForSmsApi = 'https://www.fast2sms.com/dev/bulkV2?authorization=oQLz3elcOvSHfMFhGQx5FdmL2mYKeHvm32hvSkAvoDNlTsLMCwMoZFuYrvFL&route=s&sender_id=SMSINI&message=5&variables_values=You%20got%2010%25%20discount%20on%20gold%7CVisit%20Swarna%20Mahal,%20punganoor%7Cvalid%20from%2021%20may%20to%2027%20may%7C&flash=0&numbers=7530008988'
+  route = 'route=s'
+  senderId = 'sender_id=SMSINI'
+  message = 'message=5'
+  numbers :string = ''
+  flash = 'flash=0'
+
+  message1 = '';
+  message2 = '';
+  message3 = '';
+
+
+  constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService,
+  @Inject(Router) private router :Router,
+  @Inject(HttpClient) private http :HttpClient) { 
     var date = new Date();    
     //this.dateToday = date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear();
     this.dateToday = moment().format('DD/MM/YYYY');
@@ -124,7 +139,21 @@ export class CustomerTodayComponent implements OnInit {
 
   sendMessages()
   {
-    alert("orey mukesh ga, idi malli alochinchi raddam intha varaku ok ga?")
+    //alert("orey mukesh ga, idi malli alochinchi raddam intha varaku ok ga?")
+    this.AllCustomersToday.forEach(element => {
+      if(this.numbers === '')
+        this.numbers = element.mobile;
+      else
+        this.numbers = this.numbers+','+element.mobile;
+    });
+    console.log(this.numbers);
+    this.message1 = "testsmsformukesh"
+    this.message2 = "testsmsformukesh"
+    this.message3 = "testsmsformukesh"
+    var url = 'https://www.fast2sms.com/dev/bulkV2?authorization=oQLz3elcOvSHfMFhGQx5FdmL2mYKeHvm32hvSkAvoDNlTsLMCwMoZFuYrvFL&route=s&sender_id=SMSINI&message=5&variables_values='+this.message1+this.message2+this.message3+'&flash=0&numbers='+this.numbers
+    console.log(url);
+    this.http.get<any>(url).subscribe(o => console.log(o))
+    var testUrl = this.urlForSmsApi
   }
 
 }
