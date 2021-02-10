@@ -23,7 +23,7 @@
             <td>{{customer.dob}}</td>
             <td>{{customer.address}}</td>
             <td>{{customer.uniqueCode}}</td>       
-            <td style="color:green" *ngIf="customer.offerUsed && !yetToAvailOffer">Availed</td>         
+            <td style="color:green" *ngIf="customer.offerUsed && !yetToAvailOffer"><img src="./../../../assets/icons/tickt.png" alt="true" height="25px" width="25px"></td>         
             <td *ngIf="!customer.offerUsed && !yetToAvailOffer">--</td>
             <td *ngIf="customer.offerUsed">--</td>         
             <td *ngIf="!customer.offerUsed"><button type="button" class="btn btn-success" (click)="offerUsed(customer.key)">Avail</button></td>

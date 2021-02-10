@@ -7,6 +7,7 @@ import { CustomerDetails } from 'src/app/models/CustomerDetails';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Messages } from 'src/app/models/Messages';
 
 @Component({
   selector: 'prfx-customer-today',
@@ -28,11 +29,11 @@ export class CustomerTodayComponent implements OnInit {
   senderId = 'sender_id=SMSINI'
   message = 'message=5'
   numbers :string = ''
-  flash = 'flash=0'
 
-  message1 = '';
-  message2 = '';
-  message3 = '';
+  messagesObj = new Messages();
+  uniqueCodesAlreadyGenerated :boolean = false;
+  someThingWrongWithSms :boolean = false;
+
 
 
   constructor(@Inject(CustomerDetailsService) private service :CustomerDetailsService,
@@ -56,6 +57,16 @@ export class CustomerTodayComponent implements OnInit {
       // console.log(this.AllCustomers)
       this.getCustomersWithDobThreeDaysAfter2(this.AllCustomers)
     })
+    this.service.getMessagesList().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(o => {
+      this.messagesObj = o[0];     
+      // console.log(this.messagesObj)
+    })
   }
 
   getCustomersWithDobThreeDaysAfter2(customerList :Array<FCustomerDetails>)
@@ -69,8 +80,8 @@ export class CustomerTodayComponent implements OnInit {
       }
     });
     this.todayCustomersCount = this.AllCustomersToday.length
-    console.log(this.todayCustomersCount)
-    console.log(this.AllCustomersToday)
+    // console.log(this.todayCustomersCount)
+    // console.log(this.AllCustomersToday)
   }
 
   // getCustomersWithDobThreeDaysAfter(customerList :Array<FCustomerDetails>)
@@ -108,8 +119,8 @@ export class CustomerTodayComponent implements OnInit {
   generateUniqueCodes()
   {
     this.AllCustomersToday.forEach(o => {
-      console.log(o)
-      console.log(o.uniqueCode == "")
+      // console.log(o)
+      // console.log(o.uniqueCode == "")
       if(o.uniqueCode == "")
       {
         this.count++;        
@@ -121,7 +132,7 @@ export class CustomerTodayComponent implements OnInit {
             randomNumStr=randomNumStr+'0';
           }
         }
-        o.uniqueCode = o.customerName.slice(0,3).toLocaleUpperCase() +randomNumStr+"MUK";
+        o.uniqueCode = o.customerName.slice(0,3).toLocaleUpperCase() +randomNumStr;
         var key2 = o.key;
         delete o.key;
         this.updateCustomer = o; 
@@ -133,27 +144,80 @@ export class CustomerTodayComponent implements OnInit {
       alert("unique codes generated for "+this.count+" customers.");
     else
       alert("For all the customers unique codes has already generated");
-
+    this.uniqueCodesAlreadyGenerated = true;
     this.router.navigateByUrl('/today')
   }
 
   sendMessages()
   {
-    //alert("orey mukesh ga, idi malli alochinchi raddam intha varaku ok ga?")
     this.AllCustomersToday.forEach(element => {
-      if(this.numbers === '')
-        this.numbers = element.mobile;
+      if(element.uniqueCode == "")
+        this.uniqueCodesAlreadyGenerated = false;
       else
-        this.numbers = this.numbers+','+element.mobile;
+        this.uniqueCodesAlreadyGenerated = true;
     });
-    console.log(this.numbers);
-    this.message1 = "testsmsformukesh"
-    this.message2 = "testsmsformukesh"
-    this.message3 = "testsmsformukesh"
-    var url = 'https://www.fast2sms.com/dev/bulkV2?authorization=oQLz3elcOvSHfMFhGQx5FdmL2mYKeHvm32hvSkAvoDNlTsLMCwMoZFuYrvFL&route=s&sender_id=SMSINI&message=5&variables_values='+this.message1+this.message2+this.message3+'&flash=0&numbers='+this.numbers
-    console.log(url);
-    this.http.get<any>(url).subscribe(o => console.log(o))
-    var testUrl = this.urlForSmsApi
+    var confirmMessage = confirm("Do you want to send Offer Mesages for all below customers");
+    if(confirmMessage)
+    {
+      if(this.uniqueCodesAlreadyGenerated)
+      {
+        this.sendMessagesConfirm()
+      }
+      else
+      {
+        var generateCodesNow = confirm("Not all customers have unique codes generated, Generate Unique Codes Now and continue process");
+        if(generateCodesNow)
+          this.generateUniqueCodes();
+          this.sendMessagesConfirm()
+        
+      }
+      
+    }
+  }
+
+  sendMessagesConfirm()
+  {
+    this.AllCustomersToday.forEach(o => {
+      var url = this.buildUrl(o.uniqueCode,o.mobile);
+      console.log(url.toString());
+      this.http.get<any>(url).subscribe(o => 
+      {
+        console.log(o);
+      }
+      ,error => {
+        this.someThingWrongWithSms = true;
+        console.log(this.someThingWrongWithSms)
+      })    
+    });
+    if(this.someThingWrongWithSms)
+      alert("something went wrong while sending sms, try again or check thirdparty sms account")
+    else
+      this.updateCustomersAsMessagesSent()
+  }
+
+  buildUrl(code :string,number :string)
+  {
+    var url = 'https://www.fast2sms.com/dev/bulkV2?authorization=oQLz3elcOvSHfMFhGQx5FdmL2mYKeHvm32hvSkAvoDNlTsLMCwMoZFuYrvFL&route=s&sender_id=CHKSMS&message=5&variables_values='
+    this.messagesObj.message1 =  this.messagesObj.message1.replace(/\s/g , "%20");
+    var fakeMessage2 = this.messagesObj.message2;
+    this.messagesObj.message2 =  this.messagesObj.message2.replace(/\s/g , "%20") + code;
+    this.messagesObj.message3 =  this.messagesObj.message3.replace(/\s/g , "%20");
+    url = url + this.messagesObj.message1 + "%7C" + this.messagesObj.message2 + "%7C" + this.messagesObj.message3 + "&flash=0&numbers=" + number;
+    console.log(this.messagesObj.message2)
+    this.messagesObj.message2 = fakeMessage2;
+    return url;
+  }
+
+  updateCustomersAsMessagesSent()
+  {
+    console.log("update cust offer msg")
+    this.AllCustomersToday.forEach(o => {
+      o.offerMessageSent = true;
+      var key2 = o.key;
+      delete o.key;
+      this.service.updateCustomer(key2,o);
+      console.log(o)
+    });
   }
 
 }

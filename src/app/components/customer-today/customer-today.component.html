@@ -17,6 +17,7 @@
           <th scope="col">DoB</th>
           <th scope="col">Address</th>
           <th scope="col">Unique Code</th>
+          <th scope="col">Message Status</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +26,9 @@
           <td>{{customer.mobile}}</td>
           <td>{{customer.dob}}</td>
           <td>{{customer.address}}</td>
-          <td>{{customer.uniqueCode}}</td>    
+          <td>{{customer.uniqueCode}}</td>
+          <td *ngIf="customer.offerMessageSent"><img src="./../../../assets/icons/tickt.png" alt="true" height="25px" width="25px"></td>   
+          <td *ngIf="!customer.offerMessageSent"><img src="./../../../assets/icons/cross.png" alt="true" height="25px" width="25px"></td>    
         </tr>
       </tbody>
     </table>

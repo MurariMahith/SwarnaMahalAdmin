@@ -1,3 +1,5 @@
+import { AvailStatus } from "./AvailStatus";
+
 export class CustomerDetails
 {
     customerId :string;
@@ -13,5 +15,7 @@ export class CustomerDetails
     uniqueCode :string = "";
     offerStartDate :string;
     offerEndDate :string;
+    offerMessageSent :boolean = false;
     offerUsed :boolean = false;
+    availStatus :AvailStatus = new AvailStatus();
 }

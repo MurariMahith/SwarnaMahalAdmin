@@ -70,6 +70,16 @@ export class AvailOfferComponent implements OnInit {
       {
         alert("You are availing offer for "+customerToAvailedOffer.customerName)
         customerToAvailedOffer.offerUsed = true;
+        customerToAvailedOffer.availStatus.availTime = moment().toString();
+        var status = prompt("Please enter status of availed offer, ex: item purchased, customer satisfaction, final discount applied, etc.,.")
+        if(status == null || status == '')
+        {
+          customerToAvailedOffer.availStatus.availItem = '';
+        }
+        else
+        {
+          customerToAvailedOffer.availStatus.availItem = status;
+        }
         var key2 = customerToAvailedOffer.key;
         delete customerToAvailedOffer.key;
         this.service.updateCustomer(key2,customerToAvailedOffer);

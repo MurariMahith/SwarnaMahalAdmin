@@ -1,3 +1,36 @@
-<p>
-  send works!
-</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-8">Edit Messages sent to customers here</h1>
+    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+    <!-- <p>below is form</p> -->
+    <div>
+      <form novalidate #addForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="msg1">Message 1</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="text" class="form-control" id="msg1" placeholder="Enter Message 1" required  maxlength="30" [(ngModel)]="messages.message1" name="message1" #message1="ngModel">
+          <div *ngIf="message1.invalid && (message1.dirty || message1.touched)">
+            <p *ngIf="message1.errors?.required" class="error">Message 1 is required</p>
+            <p *ngIf="message1.errors?.minlength" class="error">Max length for message 1 is 30 characters including spaces</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="msg2">Message 2</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="text" class="form-control" id="msg2" placeholder="Enter Message 2" required maxlength="30" [(ngModel)]="messages.message2" name="message2" #message2="ngModel">
+          <div *ngIf="message2.invalid && (message2.dirty || message2.touched)">
+            <p *ngIf="message2.errors?.required" class="error">Message 2 is required</p>
+            <p *ngIf="message2.errors?.minlength" class="error">Max length for message 2 is 30 characters including spaces</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="msg3">Message 3</label> <span class="badge badge-light" style="margin-left: 1%;">required</span>
+          <input type="text" class="form-control" id="msg3" placeholder="Enter Message 3" required [(ngModel)]="messages.message3" name="message3" #message3="ngModel" maxlength="30">
+          <div *ngIf="message3.invalid && (message3.dirty || message3.touched)">
+            <p *ngIf="message3.errors?.required" class="error">Message 3 is required</p>
+            <p *ngIf="message3.errors?.minlength" class="error">Max length for message 3 is 30 characters including spaces</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]='!addForm.valid' >Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

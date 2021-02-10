@@ -7,33 +7,38 @@
       <span class="navbar-toggler-icon" id="footerid"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{ 'show': navbarOpen }">
   <ul class="navbar-nav mr-auto">
-      <li class="nav-item active" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/home" style="color: white;">Home</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/cat1" style="color: white;">Category</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/cat2" style="color: white;">Category</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/cat3" style="color: white;">Category</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/cat4" style="color: white;">Category</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/aboutus" style="color: white;">About Us</a>
-      </li>
-      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" routerLink="/search" style="color: white;">Search</a>
-      </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+        <a class="nav-link btnm" routerLink="/" style="color: white;">Home</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+      <a class="nav-link btnm" routerLink="/today" style="color: white;">Generate Offers</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+      <a class="nav-link btnm" routerLink="/avail" style="color: white;">Avail Offers</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+      <a class="nav-link btnm" style="color: white;" routerLink="/all" >View All Customers</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+        <a class="nav-link btnm" style="color: white;" routerLink="/add" >Add New Customer</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+        <a class="nav-link btnm" style="color: white;" routerLink="/edit" >Edit Customers</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+      <a class="nav-link btnm" style="color: white;" routerLink="/send" >Edit Message</a>
+    </li>
+    <li class="nav-item" (click)="toggleNavbar()">
+      <a class="nav-link btnm" style="color: white;" routerLink="/personal" >Personal WorkSpace</a>
+    </li>
   </ul>
   <form class="form-inline my-2 my-lg-0">
       <!-- <button class="btn my-2 my-sm-0">Top</button> -->
-      <a class="nav-link" routerLink="/aboutdevs" style="color: white;" title="Takes you to the developers page">About Developers <span class="badge badge-dark">New</span></a>
+      <a class="nav-link" routerLink="/aboutus" style="color: white;">About Us 
+        <span class="badge badge-dark">New</span>
+    </a>
   </form>
   </div>
 </nav>
