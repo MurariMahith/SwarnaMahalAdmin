@@ -20,6 +20,7 @@
           <th scope="col">DoB</th>
           <th scope="col">Address</th>
           <th scope="col">Offer Used</th>
+          <th scope="col">Offer Used Date</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,7 @@
           <td>{{customer.address}}</td>       
           <td style="color:green" *ngIf="customer.offerUsed"><img src="./../../../assets/icons/tickt.png" alt="true" height="25px" width="25px"></td>         
           <td style="color:red" *ngIf="!customer.offerUsed"><img src="./../../../assets/icons/cross.png" alt="true" height="25px" width="25px"></td>
+          <td>{{customer.availStatus.availTime}}</td>
         </tr>
       </tbody>
     </table>

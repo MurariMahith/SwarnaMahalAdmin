@@ -5,10 +5,14 @@
       <p class="lead">Today's Date is <b>{{dateToday}}</b> and you have {{todayCustomersCount}} customer/s having birthdays on {{NextThreeDay}}</p>
       <hr class="my-4">
       <p class="lead">Click below button to go to 'send offer message' section.</p>
-      <p class="lead">
+      <!-- <p class="lead">
         <a class="btn btn-primary btn-lg" routerLink='/today' role="button" style="margin: 2%;">View Offer Page</a>
         <a class="btn btn-primary btn-lg" routerLink='/avail' role="button" style="margin: 2%;">Avail Offers</a>
-      </p>
+      </p> -->
+      <div style="display: flex;justify-content: center;flex-wrap:wrap;">
+        <a class="btn btn-primary btn-lg" style="margin: 2%;width: 300px;" routerLink='/today' role="button">View Offer Page</a>
+        <a class="btn btn-primary btn-lg" style="margin: 2%;width: 300px;" routerLink='/avail' role="button">Avail Offers</a>
+      </div>
       <hr class="my-4">
       <h3 class="display-6">Quick View</h3>
       <!-- <p class="lead"> -->

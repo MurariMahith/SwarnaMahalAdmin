@@ -56,10 +56,35 @@ export class AvailOfferComponent implements OnInit {
   {
     //here we update user as he used his offer and he is not eligible for this offer again in this year
     var customerToAvailedOffer = new FCustomerDetails();
+    var accept : boolean = false;
     customerToAvailedOffer = this.AllCustomersOriginal.find(o => o.key === key);
 
+    var todaym = moment()
+    if(todaym.isSameOrAfter(customerToAvailedOffer.offerStartDate) && todaym.isSameOrBefore(customerToAvailedOffer.offerEndDate))
+    {
+      console.log("hai");
+      accept = true;
+    }
+    else
+    {
+      if(todaym.isAfter(customerToAvailedOffer.offerEndDate))
+      {
+        var confirm3 = confirm("Offer period for "+customerToAvailedOffer.customerName+" is already completed, do you still want to avail offer for this customer")
+        if(confirm3)
+          accept = true;
+      }
+      else
+      {
+        var confirm2 = confirm("Offer dates for "+customerToAvailedOffer.customerName+" doesn't match for today's date, you can still avail offer but the customer can't reuse that offer again, do you want to continue?")
+        if(confirm2)
+          accept = true;
+      }
+    }
+
+    console.log(customerToAvailedOffer)
+
     var confirmAvailOffer = confirm("Do you want to avail offer for "+customerToAvailedOffer.customerName);
-    if(confirmAvailOffer)
+    if(confirmAvailOffer && accept)
     {
       var uniqueCodeGivenByAdmin = prompt("Please enter unique code given to customer");
       if (uniqueCodeGivenByAdmin == null || uniqueCodeGivenByAdmin == "") 
@@ -100,16 +125,40 @@ export class AvailOfferComponent implements OnInit {
     //here we update user as he used his offer and he is not eligible for this offer again in this year
     var customerToCancelOffer = new FCustomerDetails();
     customerToCancelOffer = this.AllCustomersOriginal.find(o => o.key === key);
-
-    var confirmCancelOffer = confirm("Do you want to cancel availed offer for "+customerToCancelOffer.customerName+", Now the customer can avail offer again.");
-    if(confirmCancelOffer)
+    var todaym = moment();
+    var accept : boolean = false;
+    if(todaym.isSameOrAfter(customerToCancelOffer.offerStartDate) && todaym.isSameOrBefore(customerToCancelOffer.offerEndDate))
     {
-      customerToCancelOffer.offerUsed = false;
-      var key2 = customerToCancelOffer.key;
-      delete customerToCancelOffer.key;
-      this.service.updateCustomer(key2,customerToCancelOffer);
-      console.log(customerToCancelOffer)
-      alert("Offer rolled back for "+customerToCancelOffer.customerName+".");
+      console.log("hai");
+      accept = true;
+    }
+    if(todaym.isAfter(customerToCancelOffer.offerEndDate))
+    {
+      var confirm3 = confirm("Offer period for "+customerToCancelOffer.customerName+" is already completed even if you cancel availed offer, the customer can't reuse the offer again in this year.");
+      if(confirm3)
+        accept = true;
+    }
+    if(todaym.isBefore(customerToCancelOffer.offerStartDate))
+    {
+      var confirm4 = confirm("Offer period for "+customerToCancelOffer.customerName+" is in future, if you cancel availed offer, the customer can reuse the offer again in this year.");
+      if(confirm4)
+        accept = true;
+    }
+    
+    if(accept)
+    {
+      var confirmCancelOffer = confirm("Do you want to cancel availed offer for "+customerToCancelOffer.customerName+", Now the customer can avail offer again.");
+      if(confirmCancelOffer)
+      {
+        customerToCancelOffer.offerUsed = false;
+        customerToCancelOffer.availStatus.availItem = '';
+        customerToCancelOffer.availStatus.availTime = '';
+        var key2 = customerToCancelOffer.key;
+        delete customerToCancelOffer.key;
+        this.service.updateCustomer(key2,customerToCancelOffer);
+        console.log(customerToCancelOffer)
+        alert("Offer rolled back for "+customerToCancelOffer.customerName+".");
+      }
     }
   }
 
